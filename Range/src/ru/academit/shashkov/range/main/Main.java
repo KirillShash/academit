@@ -2,7 +2,6 @@ package ru.academit.shashkov.range.main;
 
 import ru.academit.shashkov.range.Range;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
