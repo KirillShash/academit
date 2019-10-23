@@ -1,4 +1,4 @@
-import ru.academit.shashkov.shapes.Shape;
+package ru.academit.shashkov.shapes;
 
 public class Square implements Shape {
     private double sideLength;
@@ -35,4 +35,10 @@ public class Square implements Shape {
     public double getPerimeter() {
         return sideLength * NUMBER_OF_SIDES;
     }
+
+    @Override
+    public String toString() {
+        return "Square";
+    }
 }
+

@@ -47,4 +47,9 @@ public class Triangle implements Shape {
         double thirdSideLength = getSideLength(x1, y1, x3, y3);
         return firstSideLength + secondSideLength + thirdSideLength;
     }
+
+    @Override
+    public String toString() {
+        return "Triangle";
+    }
 }
