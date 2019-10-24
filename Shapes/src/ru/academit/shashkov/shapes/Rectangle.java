@@ -49,4 +49,19 @@ public class Rectangle implements Shape {
     public String toString() {
         return "Rectangle";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (o == null || o.getClass() != this.getClass()) {
+            return false;
+        }
+
+        Rectangle r = (Rectangle) o;
+
+        return horizontalSideLength == r.horizontalSideLength && verticalSideLength == r.verticalSideLength;
+    }
 }

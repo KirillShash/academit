@@ -52,4 +52,19 @@ public class Triangle implements Shape {
     public String toString() {
         return "Triangle";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (o == null || o.getClass() != this.getClass()) {
+            return false;
+        }
+
+        Triangle t = (Triangle) o;
+
+        return t.x1 == x1 && t.x2 == x2 && t.x3 == x3 && t.y1 == y1 && t.y2 == y2 && t.y3 == y3;
+    }
 }

@@ -39,4 +39,19 @@ public class Circle implements Shape {
     public String toString() {
         return "Circle";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (o == null || o.getClass() != this.getClass()) {
+            return false;
+        }
+
+        Circle c = (Circle) o;
+
+        return radius == c.radius;
+    }
 }

@@ -26,11 +26,11 @@ public class Range {
     }
 
     public double getLength() {
-        return this.to - this.from;
+        return to - from;
     }
 
     public boolean isInside(double number) {
-        return (number <= to) && (number >= from);
+        return (number >= from) && (number <= to);
     }
 
     public Range getIntersection(Range range2) {
