@@ -67,4 +67,18 @@ public class Triangle implements Shape {
 
         return t.x1 == x1 && t.x2 == x2 && t.x3 == x3 && t.y1 == y1 && t.y2 == y2 && t.y3 == y3;
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 37;
+        int hash = 1;
+        hash = prime * hash + (int) x1;
+        hash = prime * hash + (int) x2;
+        hash = prime * hash + (int) x3;
+        hash = prime * hash + (int) y1;
+        hash = prime * hash + (int) y2;
+        hash = prime * hash + (int) y3;
+
+        return hash;
+    }
 }

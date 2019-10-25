@@ -55,5 +55,14 @@ public class Square implements Shape {
 
         return s.sideLength == sideLength;
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 37;
+        int hash = 1;
+        hash = prime * hash + (int) sideLength;
+
+        return hash;
+    }
 }
 

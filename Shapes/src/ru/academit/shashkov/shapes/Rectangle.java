@@ -64,4 +64,14 @@ public class Rectangle implements Shape {
 
         return horizontalSideLength == r.horizontalSideLength && verticalSideLength == r.verticalSideLength;
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 37;
+        int hash = 1;
+        hash = prime * hash + (int) verticalSideLength;
+        hash = prime * hash + (int) horizontalSideLength;
+
+        return hash;
+    }
 }

@@ -37,6 +37,7 @@ public class Range {
         if (from >= range2.to || range2.from >= to) {
             return null;
         }
+
         if (range2.from >= from && range2.to <= to) {
             return new Range(range2.from, range2.to);
         }
