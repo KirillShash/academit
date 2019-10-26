@@ -23,7 +23,7 @@ public class Main {
         Range range1 = new Range(from1, to1);
         Range range2 = new Range(from2, to2);
 
-        System.out.printf("Первый интервал: [%.2f %.2f]%nВторой интервал: [%.2f %.2f]%n", from1, to1, from2, to2);
+        System.out.printf("Первый интервал: %s%nВторой интервал: %s%n", range1.toString(), range2.toString());
 
         System.out.println("Число для проверки вхождения в интервалы:");
         double number = scanner.nextDouble();
@@ -42,25 +42,25 @@ public class Main {
         if (intersectionOfRanges == null) {
             System.out.println("Пересечений интервалов нет.");
         } else {
-            System.out.printf("Интервал пересечения - [%.2f %.2f]%n", intersectionOfRanges.getFrom(), intersectionOfRanges.getTo());
+            System.out.printf("Интервал пересечения - %s%n", intersectionOfRanges.toString());
         }
 
         Range[] union = range1.getUnion(range2);
 
         if (union.length > 1) {
-            System.out.printf("Результатом объединения являются: [%.2f %.2f] и [%.2f %.2f]%n", union[0].getFrom(), union[0].getTo(), union[1].getFrom(), union[1].getTo());
+            System.out.printf("Результатом объединения являются: %s и %s%n", union[0].toString(), union[1].toString());
         } else {
-            System.out.printf("Результатом объединения явлется: [%.2f %.2f]%n", union[0].getFrom(), union[0].getTo());
+            System.out.printf("Результатом объединения явлется: %s%n", union[0].toString());
         }
 
         Range[] difference = range1.getDifference(range2);
 
         if (difference.length > 1) {
-            System.out.printf("Результатом разности являются: [%.2f %.2f] и [%.2f %.2f]%n", difference[0].getFrom(), difference[0].getTo(), difference[1].getFrom(), difference[1].getTo());
+            System.out.printf("Результатом разности являются: %s и %s%n", difference[0].toString(), difference[1].toString());
         } else if (difference.length == 0) {
             System.out.println("Разность данных интервалов - пустой интервал.");
         } else {
-            System.out.printf("Результатом разности явлется: [%.2f %.2f]%n", difference[0].getFrom(), difference[0].getTo());
+            System.out.printf("Результатом разности явлется: %s", difference[0].toString());
         }
     }
 }

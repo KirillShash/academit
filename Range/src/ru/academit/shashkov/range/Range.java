@@ -34,43 +34,25 @@ public class Range {
     }
 
     public Range getIntersection(Range range2) {
-        if (from >= range2.to || range2.from >= to) {
-            return null;
+        double x = Math.max(from, range2.from);
+        double y = Math.min(to, range2.to);
+
+        if (x < y) {
+            return new Range(x, y);
         }
 
-        if (range2.from >= from && range2.to <= to) {
-            return new Range(range2.from, range2.to);
-        }
-
-        if (range2.from <= from && range2.to > to) {
-            return new Range(from, to);
-        }
-
-        if (from < range2.from && to < range2.to) {
-            return new Range(range2.from, to);
-        }
-
-        return new Range(from, range2.to);
+        return null;
     }
 
     public Range[] getUnion(Range range2) {
-        if (from > range2.to || range2.from > to) {
-            return new Range[]{new Range(from, to), new Range(range2.from, range2.to)};
+        double x = Math.max(from, range2.from);
+        double y = Math.min(to, range2.to);
+
+        if (x <= y) {
+            return new Range[]{new Range(Math.min(from, range2.from), Math.max(to, range2.to))};
         }
 
-        if (from < range2.from && to > range2.to) {
-            return new Range[]{new Range(from, to)};
-        }
-
-        if (from >= range2.from && to <= range2.to) {
-            return new Range[]{new Range(range2.from, range2.to)};
-        }
-
-        if (from < range2.from && to <= range2.to) {
-            return new Range[]{new Range(from, range2.to)};
-        }
-
-        return new Range[]{new Range(range2.from, to)};
+        return new Range[]{new Range(from, to), new Range(range2.from, range2.to)};
     }
 
     public Range[] getDifference(Range range2) {
@@ -91,5 +73,10 @@ public class Range {
         }
 
         return new Range[]{new Range(range2.to, to)};
+    }
+
+    @Override
+    public String toString() {
+        return "[" + from + " " + to + "]";
     }
 }
