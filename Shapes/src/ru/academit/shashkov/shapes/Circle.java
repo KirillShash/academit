@@ -37,7 +37,7 @@ public class Circle implements Shape {
 
     @Override
     public String toString() {
-        return "Circle";
+        return String.format("Окружность с радиусом = %.1f. Площадь = %.1f. Периметр = %.1f.%n", radius, getArea(), getPerimeter());
     }
 
     @Override
@@ -59,7 +59,7 @@ public class Circle implements Shape {
     public int hashCode() {
         final int prime = 37;
         int hash = 1;
-        hash = prime * hash + (int) radius;
+        hash = prime * hash + Double.hashCode(radius);
 
         return hash;
     }

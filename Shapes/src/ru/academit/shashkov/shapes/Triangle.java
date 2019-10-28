@@ -50,7 +50,8 @@ public class Triangle implements Shape {
 
     @Override
     public String toString() {
-        return "Triangle";
+        return String.format("Треугольник c координатами вершин x1 = %.1f| x2 = %.1f| x3 = %.1f| y1 = %.1f| y2 = %.1f| y3 = %.1f. " +
+                "Площадь = %.1f. Периметр = %.1f.%n", x1, x2, x3, y1, y2, y3, getArea(), getPerimeter());
     }
 
     @Override
@@ -72,12 +73,12 @@ public class Triangle implements Shape {
     public int hashCode() {
         final int prime = 37;
         int hash = 1;
-        hash = prime * hash + (int) x1;
-        hash = prime * hash + (int) x2;
-        hash = prime * hash + (int) x3;
-        hash = prime * hash + (int) y1;
-        hash = prime * hash + (int) y2;
-        hash = prime * hash + (int) y3;
+        hash = prime * hash + Double.hashCode(x1);
+        hash = prime * hash + Double.hashCode(x2);
+        hash = prime * hash + Double.hashCode(x3);
+        hash = prime * hash + Double.hashCode(y1);
+        hash = prime * hash + Double.hashCode(y2);
+        hash = prime * hash + Double.hashCode(y3);
 
         return hash;
     }

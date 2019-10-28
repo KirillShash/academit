@@ -47,7 +47,7 @@ public class Rectangle implements Shape {
 
     @Override
     public String toString() {
-        return "Rectangle";
+        return String.format("Прямоугольник с ВС = %.1f и ГС = %.1f. Площадь = %.1f. Периметр = %.1f.%n", verticalSideLength, horizontalSideLength, getArea(), getPerimeter());
     }
 
     @Override
@@ -69,8 +69,8 @@ public class Rectangle implements Shape {
     public int hashCode() {
         final int prime = 37;
         int hash = 1;
-        hash = prime * hash + (int) verticalSideLength;
-        hash = prime * hash + (int) horizontalSideLength;
+        hash = prime * hash + Double.hashCode(verticalSideLength);
+        hash = prime * hash + Double.hashCode(horizontalSideLength);
 
         return hash;
     }
