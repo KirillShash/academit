@@ -33,46 +33,46 @@ public class Range {
         return (number >= from) && (number <= to);
     }
 
-    public Range getIntersection(Range range2) {
-        double x = Math.max(from, range2.from);
-        double y = Math.min(to, range2.to);
+    public Range getIntersection(Range range) {
+        double maxFrom = Math.max(from, range.from);
+        double minTo = Math.min(to, range.to);
 
-        if (x < y) {
-            return new Range(x, y);
+        if (maxFrom < minTo) {
+            return new Range(maxFrom, minTo);
         }
 
         return null;
     }
 
-    public Range[] getUnion(Range range2) {
-        double x = Math.max(from, range2.from);
-        double y = Math.min(to, range2.to);
+    public Range[] getUnion(Range range) {
+        double maxFrom = Math.max(from, range.from);
+        double minTo = Math.min(to, range.to);
 
-        if (x <= y) {
-            return new Range[]{new Range(Math.min(from, range2.from), Math.max(to, range2.to))};
+        if (maxFrom <= minTo) {
+            return new Range[]{new Range(Math.min(from, range.from), Math.max(to, range.to))};
         }
 
-        return new Range[]{new Range(from, to), new Range(range2.from, range2.to)};
+        return new Range[]{new Range(from, to), new Range(range.from, range.to)};
     }
 
-    public Range[] getDifference(Range range2) {
-        if (range2.from > to || range2.to < from) {
+    public Range[] getDifference(Range range) {
+        if (range.from > to || range.to < from) {
             return new Range[]{new Range(from, to)};
         }
 
-        if (range2.from > from && range2.to < to) {
-            return new Range[]{new Range(from, range2.from), new Range(range2.to, to)};
+        if (range.from > from && range.to < to) {
+            return new Range[]{new Range(from, range.from), new Range(range.to, to)};
         }
 
-        if (range2.from <= from && range2.to >= to) {
+        if (range.from <= from && range.to >= to) {
             return new Range[0];
         }
 
-        if (range2.from > from && range2.to >= to) {
-            return new Range[]{new Range(from, range2.from)};
+        if (range.from > from && range.to >= to) {
+            return new Range[]{new Range(from, range.from)};
         }
 
-        return new Range[]{new Range(range2.to, to)};
+        return new Range[]{new Range(range.to, to)};
     }
 
     @Override

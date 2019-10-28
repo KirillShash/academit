@@ -23,7 +23,7 @@ public class Main {
         Range range1 = new Range(from1, to1);
         Range range2 = new Range(from2, to2);
 
-        System.out.printf("Первый интервал: %s%nВторой интервал: %s%n", range1.toString(), range2.toString());
+        System.out.printf("Первый интервал: %s%nВторой интервал: %s%n", range1, range2);
 
         System.out.println("Число для проверки вхождения в интервалы:");
         double number = scanner.nextDouble();
@@ -37,30 +37,30 @@ public class Main {
         System.out.printf("Длина первого интервала = %.2f%n", length1);
         System.out.printf("Длина второго интервала = %.2f%n", length2);
 
-        Range intersectionOfRanges = range1.getIntersection(range2);
+        Range intersection = range1.getIntersection(range2);
 
-        if (intersectionOfRanges == null) {
+        if (intersection == null) {
             System.out.println("Пересечений интервалов нет.");
         } else {
-            System.out.printf("Интервал пересечения - %s%n", intersectionOfRanges.toString());
+            System.out.printf("Интервал пересечения - %s%n", intersection);
         }
 
         Range[] union = range1.getUnion(range2);
 
         if (union.length > 1) {
-            System.out.printf("Результатом объединения являются: %s и %s%n", union[0].toString(), union[1].toString());
+            System.out.printf("Результатом объединения являются: %s и %s%n", union[0], union[1]);
         } else {
-            System.out.printf("Результатом объединения явлется: %s%n", union[0].toString());
+            System.out.printf("Результатом объединения явлется: %s%n", union[0]);
         }
 
         Range[] difference = range1.getDifference(range2);
 
         if (difference.length > 1) {
-            System.out.printf("Результатом разности являются: %s и %s%n", difference[0].toString(), difference[1].toString());
+            System.out.printf("Результатом разности являются: %s и %s%n", difference[0], difference[1]);
         } else if (difference.length == 0) {
             System.out.println("Разность данных интервалов - пустой интервал.");
         } else {
-            System.out.printf("Результатом разности явлется: %s", difference[0].toString());
+            System.out.printf("Результатом разности явлется: %s", difference[0]);
         }
     }
 }
