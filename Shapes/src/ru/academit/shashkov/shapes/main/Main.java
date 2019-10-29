@@ -21,14 +21,14 @@ public class Main {
         Arrays.sort(shapesForCalculatingArea, new ShapeAreaComparator());
         Arrays.sort(shapesForCalculatingPerimeter, new ShapePerimeterComparator());
 
-        StringBuffer line1 = new StringBuffer("Площади в порядке возрастания = ");
+        StringBuilder line1 = new StringBuilder("Площади в порядке возрастания = ");
 
         for (Shape shape : shapesForCalculatingArea) {
             line1.append(String.format("%.2f| ", shape.getArea()));
         }
         System.out.println(line1);
 
-        StringBuffer line2 = new StringBuffer("Периметры в порядке возрастания = ");
+        StringBuilder line2 = new StringBuilder("Периметры в порядке возрастания = ");
 
         for (Shape shape : shapesForCalculatingPerimeter) {
             line2.append(String.format("%.2f| ", shape.getPerimeter()));
