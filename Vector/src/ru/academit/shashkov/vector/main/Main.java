@@ -10,7 +10,7 @@ public class Main {
         Vector vector4 = new Vector(7, new double[]{1, 2, 3, 4, 5});
         Vector vector5 = new Vector(new double[]{-3, -1, -5, -7, -4});
         Vector vector6 = new Vector(new double[]{3, 1, 5, 7, 4});
-        Vector vector7 = new Vector(new double[]{-3, -1, 2, 8});
+        Vector vector7 = new Vector(new double[]{-3, -1, -5, -7, -4});
 
         System.out.printf("Векторы для теста функций:%n№1 = %s%n№2 = %s%n№3 = %s%n№4 = %s%n№5 = %s%n№6 = %s%n№7 = %s%n", vector1, vector2, vector3, vector4, vector5, vector6, vector7);
 
@@ -21,13 +21,13 @@ public class Main {
 
         System.out.println("Размерность вектора №4 = " + vector4.getSize());
 
-        System.out.println("Нестатическое сложение вектора №1 и вектора №3 = " + vector1.getSum(vector3));
+        System.out.println("Нестатическое сложение вектора №1 и вектора №3 = " + vector1.addVector(vector3));
 
-        System.out.println("Нестатическое вычитание вектора №4 из вектора №3 = " + vector4.getDifference(vector3));
+        System.out.println("Нестатическое вычитание вектора №4 из вектора №3 = " + vector4.subtractVector(vector3));
 
-        System.out.println("Разворот вектора № 3 = " + vector3.getRotate());
+        System.out.println("Разворот вектора № 3 = " + vector3.rotateVector());
 
-        System.out.println("Умножение на скаляр 5 вектора №3 = " + vector3.getMultiplyByScalar(5));
+        System.out.println("Умножение на скаляр 5 вектора №3 = " + vector3.multiplyByScalar(5));
 
         System.out.println("Длина вектора №5 = " + vector5.getLength());
 
