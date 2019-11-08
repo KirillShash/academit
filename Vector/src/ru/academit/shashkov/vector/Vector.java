@@ -1,7 +1,6 @@
 package ru.academit.shashkov.vector;
 
 import java.util.Arrays;
-import java.util.StringTokenizer;
 
 public class Vector {
     private double[] elements;
@@ -54,7 +53,7 @@ public class Vector {
         return elements.length;
     }
 
-    public Vector addVector(Vector vector) {
+    public Vector add(Vector vector) {
         if (elements.length < vector.elements.length) {
             elements = Arrays.copyOf(elements, vector.elements.length);
         }
@@ -66,7 +65,7 @@ public class Vector {
         return this;
     }
 
-    public Vector subtractVector(Vector vector) {
+    public Vector subtract(Vector vector) {
         if (elements.length < vector.elements.length) {
             elements = Arrays.copyOf(elements, vector.elements.length);
         }
@@ -86,7 +85,7 @@ public class Vector {
         return this;
     }
 
-    public Vector rotateVector() {
+    public Vector rotate() {
         multiplyByScalar(-1);
 
         return this;
@@ -96,7 +95,7 @@ public class Vector {
         double length = 0;
 
         for (double element : elements) {
-            length = length + Math.pow(element, 2);
+            length += Math.pow(element, 2);
         }
 
         return Math.sqrt(length);
@@ -104,9 +103,17 @@ public class Vector {
 
     @Override
     public String toString() {
-        String result = Arrays.toString(elements);
+        StringBuilder result = new StringBuilder();
 
-        return "{" + result.substring(1, result.length() - 1) + "}";
+        result.append("{ ").append(elements[0]);
+
+        for (int i = 1; i < elements.length; i++) {
+            result.append(", ").append(elements[i]);
+        }
+
+        result.append(" }");
+
+        return result.toString();
     }
 
     @Override
@@ -147,7 +154,7 @@ public class Vector {
     public static Vector getSum(Vector vector1, Vector vector2) {
         Vector v = new Vector(vector1);
 
-        v.addVector(vector2);
+        v.add(vector2);
 
         return v;
     }
@@ -155,7 +162,7 @@ public class Vector {
     public static Vector getDifference(Vector vector1, Vector vector2) {
         Vector v = new Vector(vector1);
 
-        v.subtractVector(vector2);
+        v.subtract(vector2);
 
         return v;
     }

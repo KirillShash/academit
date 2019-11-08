@@ -21,11 +21,11 @@ public class Main {
 
         System.out.println("Размерность вектора №4 = " + vector4.getSize());
 
-        System.out.println("Нестатическое сложение вектора №1 и вектора №3 = " + vector1.addVector(vector3));
+        System.out.println("Нестатическое сложение вектора №1 и вектора №3 = " + vector1.add(vector3));
 
-        System.out.println("Нестатическое вычитание вектора №4 из вектора №3 = " + vector4.subtractVector(vector3));
+        System.out.println("Нестатическое вычитание вектора №4 из вектора №3 = " + vector4.subtract(vector3));
 
-        System.out.println("Разворот вектора № 3 = " + vector3.rotateVector());
+        System.out.println("Разворот вектора № 3 = " + vector3.rotate());
 
         System.out.println("Умножение на скаляр 5 вектора №3 = " + vector3.multiplyByScalar(5));
 
