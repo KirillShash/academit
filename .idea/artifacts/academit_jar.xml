@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="academit:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/academit_jar</output-path>
+    <root id="archive" name="academit.jar">
+      <element id="module-output" name="Matrix" />
+      <element id="module-output" name="Vector" />
+      <element id="module-output" name="List" />
+      <element id="module-output" name="Shapes" />
+      <element id="module-output" name="MyHashTable" />
+      <element id="module-output" name="TemperatureConverter" />
+      <element id="module-output" name="ArrayListHome" />
+      <element id="module-output" name="Range" />
+      <element id="module-output" name="MyArrayList" />
+    </root>
+  </artifact>
+</component>
