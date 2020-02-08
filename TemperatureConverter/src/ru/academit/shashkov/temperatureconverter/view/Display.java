@@ -1,17 +1,21 @@
 package ru.academit.shashkov.temperatureconverter.view;
 
-import ru.academit.shashkov.temperatureconverter.model.Converter;
+import ru.academit.shashkov.temperatureconverter.controller.Controller;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Display {
-    public String leftType;
-    public String rightType;
+public class Display implements View {
+    private final Controller controller;
+    private JLabel result;
+
+    public Display(Controller controller) {
+        this.controller = controller;
+    }
 
     public void run() {
         JFrame frame = new JFrame("Temperature converter");
-        frame.setSize(300, 300);
+        frame.setSize(350, 350);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -23,11 +27,11 @@ public class Display {
         GridBagConstraints c = new GridBagConstraints();
         c.weightx = 1;
 
-        JTextField textField1 = new JTextField();
+        JTextField inputText = new JTextField();
         c.gridx = 1;
         c.gridy = 0;
-        textField1.setColumns(2);
-        panel.add(textField1, c);
+        inputText.setColumns(2);
+        panel.add(inputText, c);
 
         JComboBox<String> comboBoxLeft = new JComboBox<>();
         comboBoxLeft.addItem("K");
@@ -47,7 +51,7 @@ public class Display {
         c.gridy = 1;
         panel.add(b, c);
 
-        JLabel result = new JLabel("result");
+        result = new JLabel("result");
         c.gridx = 1;
         c.gridy = 2;
         panel.add(result, c);
@@ -67,19 +71,20 @@ public class Display {
 
         b.addActionListener((e) -> {
             try {
-                leftType = (String) comboBoxLeft.getSelectedItem();
-                rightType = (String) comboBoxRight.getSelectedItem();
-
-                Converter converter = new Converter(Double.parseDouble(textField1.getText()), leftType, rightType);
-                converter.convert();
-
-                result.setText(converter.printResult());
+                String leftType = (String) comboBoxLeft.getSelectedItem();
+                String rightType = (String) comboBoxRight.getSelectedItem();
+                controller.convert(Double.parseDouble(inputText.getText()), leftType, rightType);
             } catch (NumberFormatException e1) {
                 JOptionPane.showMessageDialog(frame, "Only numbers and one dot are available for input.");
-                textField1.setText(null);
+                inputText.setText(null);
             }
         });
 
+    }
+
+    @Override
+    public void setResult(String text) {
+        result.setText(text);
     }
 }
 

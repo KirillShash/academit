@@ -1,5 +1,7 @@
 package ru.academit.shashkov.temperatureconverter.main;
 
+import ru.academit.shashkov.temperatureconverter.controller.Controller;
+import ru.academit.shashkov.temperatureconverter.model.Model;
 import ru.academit.shashkov.temperatureconverter.view.Display;
 
 import javax.swing.*;
@@ -7,7 +9,10 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            Display display = new Display();
+            Model model = new Model();
+            Controller controller = new Controller(model);
+            Display display = new Display(controller);
+            controller.setView(display);
             display.run();
         });
     }

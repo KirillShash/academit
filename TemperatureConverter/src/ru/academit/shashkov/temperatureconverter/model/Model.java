@@ -1,27 +1,17 @@
 package ru.academit.shashkov.temperatureconverter.model;
 
-public class Converter {
+public class Model {
     private double result;
-    private double temperature;
-    private String leftStatement;
-    private String rightStatement;
 
-    public Converter(double temperature, String leftStatement, String rightStatement) {
-        this.temperature = temperature;
-        this.rightStatement = rightStatement;
-        this.leftStatement = leftStatement;
-    }
-
-    public String printResult() {
+    public String getResult() {
         return String.format("%.2f", result);
     }
 
-    public void convert() {
+    public void convert(double temperature, String leftStatement, String rightStatement) {
         result = temperature;
 
         if (leftStatement.equals("K") && rightStatement.equals("F")) {
             result = (temperature - 273.15) * 9 / 5 + 32;
-            ;
         }
 
         if (leftStatement.equals("K") && rightStatement.equals("C")) {
