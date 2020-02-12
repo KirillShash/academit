@@ -13,7 +13,6 @@
       <module fileurl="file://$PROJECT_DIR$/TemperatureConverter/TemperatureConverter.iml" filepath="$PROJECT_DIR$/TemperatureConverter/TemperatureConverter.iml" />
       <module fileurl="file://$PROJECT_DIR$/Test/Test.iml" filepath="$PROJECT_DIR$/Test/Test.iml" />
       <module fileurl="file://$PROJECT_DIR$/Vector/Vector.iml" filepath="$PROJECT_DIR$/Vector/Vector.iml" />
-      <module fileurl="file://$PROJECT_DIR$/academit.iml" filepath="$PROJECT_DIR$/academit.iml" />
     </modules>
   </component>
 </project>
