@@ -74,7 +74,7 @@ public class Display implements View {
                 String leftType = (String) comboBoxLeft.getSelectedItem();
                 String rightType = (String) comboBoxRight.getSelectedItem();
                 controller.convert(Double.parseDouble(inputText.getText()), leftType, rightType);
-            } catch (NumberFormatException e1) {
+            } catch (NumberFormatException exception) {
                 JOptionPane.showMessageDialog(frame, "Only numbers and one dot are available for input.");
                 inputText.setText(null);
             }
