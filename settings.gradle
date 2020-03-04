@@ -1,2 +1,4 @@
 rootProject.name = 'academit'
+include 'main'
+include 'Minesweeper'
 

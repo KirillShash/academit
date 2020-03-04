@@ -1,17 +1,22 @@
 package ru.academit.shashkov.minesweeper.view;
 
+import lombok.Getter;
+import ru.academit.shashkov.minesweeper.common.CellState;
+import ru.academit.shashkov.minesweeper.view.iconsmanager.IconsManager;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class FieldConstructor {
-    public static void getField(int columns, int rows) {
-        JButton[][] cells = new JButton[columns][rows];
+    @Getter
+    private static JButton[][] cells;
 
-        ImageIcon icon1 = new ImageIcon("C:\\Users\\Kirill\\IdeaProjects\\academit\\Minesweeper\\resources\\icons\\0.png");
+    public static void buildField(int rows, int columns) {
+        cells = new JButton[columns][rows];
 
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[i].length; j++) {
-                cells[i][j] = new JButton(icon1);
+                cells[i][j] = new JButton(IconsManager.getStateIcon(CellState.CLOSED));
                 cells[i][j].setBorder(null);
                 cells[i][j].setFocusPainted(false);
                 cells[i][j].setContentAreaFilled(false);
@@ -21,7 +26,7 @@ public class FieldConstructor {
         GridBagConstraints bagConstraints = new GridBagConstraints();
 
         for (int i = 0; i < cells.length; i++) {
-            bagConstraints.gridx = 1 + i;
+            bagConstraints.gridx = i;
             for (int j = 0; j < cells[i].length; j++) {
                 Display.getPanel().add(cells[i][j], bagConstraints);
             }
