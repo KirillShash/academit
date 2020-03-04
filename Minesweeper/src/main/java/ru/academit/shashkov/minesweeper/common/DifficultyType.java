@@ -1,8 +1,8 @@
 package ru.academit.shashkov.minesweeper.common;
 
 public enum DifficultyType {
-    EASY_MOD,
-    MEDIUM_MOD,
-    HARD_MOD,
+    BEGINNER_MOD,
+    INTERMEDIATE_MOD,
+    EXPERT_MOD,
     CUSTOM_MOD
 }

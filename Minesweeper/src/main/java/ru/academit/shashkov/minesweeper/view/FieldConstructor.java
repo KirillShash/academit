@@ -1,6 +1,7 @@
 package ru.academit.shashkov.minesweeper.view;
 
 import lombok.Getter;
+import ru.academit.shashkov.minesweeper.common.CellContent;
 import ru.academit.shashkov.minesweeper.common.CellState;
 import ru.academit.shashkov.minesweeper.view.iconsmanager.IconsManager;
 
@@ -17,6 +18,7 @@ public class FieldConstructor {
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[i].length; j++) {
                 cells[i][j] = new JButton(IconsManager.getStateIcon(CellState.CLOSED));
+                cells[i][j].setPressedIcon(IconsManager.getContentIcon(CellContent.EMPTY));
                 cells[i][j].setBorder(null);
                 cells[i][j].setFocusPainted(false);
                 cells[i][j].setContentAreaFilled(false);
@@ -28,7 +30,7 @@ public class FieldConstructor {
         for (int i = 0; i < cells.length; i++) {
             bagConstraints.gridx = i;
             for (int j = 0; j < cells[i].length; j++) {
-                Display.getPanel().add(cells[i][j], bagConstraints);
+                Display.getBody().add(cells[i][j], bagConstraints);
             }
         }
     }
