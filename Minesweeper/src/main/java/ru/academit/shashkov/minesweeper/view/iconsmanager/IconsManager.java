@@ -11,7 +11,6 @@ import java.util.Map;
 public class IconsManager {
     private static final Map<CellContent, Icon> cellContentIcons;
     private static final Map<CellState, Icon> cellStateIcons;
-
     @Getter
     private static final ImageIcon gameIcon;
     @Getter

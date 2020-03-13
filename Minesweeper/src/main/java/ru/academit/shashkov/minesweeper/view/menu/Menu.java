@@ -1,6 +1,7 @@
 package ru.academit.shashkov.minesweeper.view.menu;
 
 import lombok.Getter;
+import ru.academit.shashkov.minesweeper.view.ActionListenerManager;
 
 import javax.swing.*;
 
@@ -60,6 +61,11 @@ public class Menu {
         menu.add(highScoreTable);
         menu.add(exit);
         menuBar.add(menu);
+
+        ActionListenerManager.startBeginnerMode();
+        ActionListenerManager.startExpertMode();
+        ActionListenerManager.startIntermediateMode();
+        ActionListenerManager.exit();
 
         return menuBar;
     }

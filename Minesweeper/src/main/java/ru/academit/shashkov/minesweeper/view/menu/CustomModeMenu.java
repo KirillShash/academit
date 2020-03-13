@@ -1,60 +1,76 @@
 package ru.academit.shashkov.minesweeper.view.menu;
 
 import lombok.Getter;
+import ru.academit.shashkov.minesweeper.common.DifficultyType;
+import ru.academit.shashkov.minesweeper.view.Body;
+import ru.academit.shashkov.minesweeper.view.FieldConstructor;
+import ru.academit.shashkov.minesweeper.view.MinesweeperView;
 import ru.academit.shashkov.minesweeper.view.iconsmanager.IconsManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.Hashtable;
+import java.util.Map;
 
-public class CustomModeMenu {
+public class CustomModeMenu extends JFrame {
+    private static JDialog dialog;
+    private static JTextField rows;
+    private static JTextField columns;
+    private static JTextField mines;
     @Getter
-    private static int rows;
+    private static int rowsCount;
     @Getter
-    private static int columns;
+    private static int columnsCount;
     @Getter
-    private static int mines;
+    private static int minesCount;
+    @Getter
+    private static JButton acceptButton;
+    @Getter
+    private static JButton cancelButton;
 
-    public static void addCustomMenu() {
-        JFrame frame = new JFrame("Custom mode");
-        frame.setSize(300, 200);
-        frame.setResizable(false);
-        frame.setResizable(false);
-        frame.setLocationRelativeTo(null);
-        frame.setIconImage(IconsManager.getGameIcon().getImage());
+    static {
+        rows = new JTextField(3);
+        columns = new JTextField(3);
+        mines = new JTextField(3);
+        acceptButton = new JButton("Accept");
+        cancelButton = new JButton("Cancel");
+    }
+
+    public void addCustomMenu() {
+        Menu.getCustomMode().addActionListener(actionEvent -> {
+            JDialog dialog = createDialog();
+            dialog.setVisible(true);
+        });
+        addActionListener();
+    }
+
+    private JDialog createDialog() {
+        dialog = new JDialog(this, "Custom mode", true);
+        dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        dialog.setSize(300, 200);
+        dialog.setResizable(false);
+        dialog.setLocationRelativeTo(null);
+        dialog.setIconImage(IconsManager.getGameIcon().getImage());
 
         JPanel panel = new JPanel(new GridBagLayout());
-        frame.setContentPane(panel);
-
         GridBagConstraints constraints = new GridBagConstraints();
 
         JLabel rowsLabel = new JLabel("Rows");
-        JTextField rowsCount = new JTextField();
         JLabel columnsLabel = new JLabel("Columns");
-        JTextField columnsCount = new JTextField();
         JLabel minesLabel = new JLabel("Mines");
-        JTextField minesCount = new JTextField();
-
-        rowsCount.setColumns(2);
-        columnsCount.setColumns(2);
-        minesCount.setColumns(2);
-
-        JButton acceptButton = new JButton("Accept");
-        JButton cancelButton = new JButton("Cancel");
 
         constraints.weighty = 1;
 
         panel.add(rowsLabel, constraints);
-        panel.add(rowsCount, constraints);
+        panel.add(rows, constraints);
 
         constraints.gridy = 1;
         panel.add(columnsLabel, constraints);
-        panel.add(columnsCount, constraints);
+        panel.add(columns, constraints);
 
         constraints.gridy = 2;
         panel.add(minesLabel, constraints);
-        panel.add(minesCount, constraints);
+        panel.add(mines, constraints);
 
         constraints.gridy = 3;
         panel.add(acceptButton, constraints);
@@ -62,24 +78,104 @@ public class CustomModeMenu {
         constraints.gridx = 1;
         panel.add(cancelButton, constraints);
 
-        Menu.getCustomMode().addActionListener(actionEvent -> {
-            frame.setVisible(true);
-        });
+        dialog.add(panel);
 
-        acceptButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                try {
-                    rows = Integer.parseInt(rowsCount.getText());
-                    columns = Integer.parseInt(columnsCount.getText());
-                    mines = Integer.parseInt(minesCount.getText());
-                } catch (NumberFormatException exception) {
-                    JOptionPane.showMessageDialog(frame, "Only integers are allowed for input.");
-                    rowsCount.setText(null);
-                    columnsCount.setText(null);
-                    minesCount.setText(null);
+        return dialog;
+    }
+
+    private void addActionListener() {
+        CustomModeMenu.getAcceptButton().addActionListener(actionEvent -> {
+            try {
+                rowsCount = Integer.parseInt(rows.getText());
+                columnsCount = Integer.parseInt(columns.getText());
+                minesCount = Integer.parseInt(mines.getText());
+
+                if (!checkValues()) {
+                    return;
                 }
+
+                Body.restartBody();
+                FieldConstructor.buildField(DifficultyType.CUSTOM_MODE);
+                setVisible(false);
+
+                MinesweeperView.getFrame().setSize(getDimensionCustomMode());
+
+                Body.updateBody();
+            } catch (NumberFormatException exception) {
+                JOptionPane.showMessageDialog(dialog, "Only integers are allowed for input.");
+                restartCustomMenu();
             }
         });
+
+        cancelButton.addActionListener(actionEvent -> {
+            setVisible(false);
+            restartCustomMenu();
+        });
+    }
+
+    public static Dimension getDimensionCustomMode() {
+        Map<Integer, Integer> sizes = new Hashtable<>();
+        int size = 500;
+
+        if (rowsCount > 9 || columnsCount > 9) {
+            for (int i = 10, j = 0; i <= 30; i++, j++) {
+                if (j >= 4) {
+                    size += 150;
+                    j = 0;
+                }
+                sizes.put(i, size);
+            }
+
+            int width;
+            int height;
+
+            if (rowsCount < 9) {
+                height = 500;
+            } else {
+                height = sizes.get(rowsCount);
+            }
+
+            if (columnsCount < 9) {
+                width = 500;
+            } else {
+                width = sizes.get(columnsCount);
+            }
+
+            return new Dimension(width, height);
+        }
+
+        return new Dimension(size, size);
+    }
+
+    private boolean checkValues() {
+        int maxNumbersOfMines = rowsCount * columnsCount;
+        int maxNumbersOfCells = 30;
+        int minNumbersOfCell = 1;
+
+        if (minesCount <= 0 || rowsCount <= 0 || columnsCount <= 0) {
+            JOptionPane.showMessageDialog(dialog, "Minimum  number of mines, rows or columns = " + minNumbersOfCell);
+            restartCustomMenu();
+            return false;
+        }
+
+        if (minesCount > maxNumbersOfMines) {
+            JOptionPane.showMessageDialog(dialog, "Maximum number of mines = " + maxNumbersOfMines);
+            restartCustomMenu();
+            return false;
+        }
+
+        if (rowsCount > maxNumbersOfCells || columnsCount > maxNumbersOfCells) {
+            JOptionPane.showMessageDialog(dialog, "Maximum number of rows or columns = " + maxNumbersOfCells);
+            restartCustomMenu();
+            return false;
+        }
+
+        return true;
+    }
+
+    private void restartCustomMenu() {
+        rows.setText(null);
+        columns.setText(null);
+        mines.setText(null);
     }
 }

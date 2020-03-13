@@ -12,27 +12,28 @@ public class ActionListenerManager {
 
     public static void startBeginnerMode() {
         Menu.getBeginnerMode().addActionListener(actionEvent -> {
-            Display.restart();
-            FieldConstructor.buildField(9, 9);
-            Display.updatePanel();
+            Body.restartBody();
+            FieldConstructor.buildField(DifficultyType.BEGINNER_MODE);
+            MinesweeperView.setFrameSizeForDifficult(DifficultyType.BEGINNER_MODE);
+            Body.updateBody();
         });
     }
 
     public static void startIntermediateMode() {
         Menu.getIntermediateMode().addActionListener(actionEvent -> {
-            Display.restart();
-            FieldConstructor.buildField(16, 16);
-            Display.setFrameSizeForDifficult(DifficultyType.INTERMEDIATE_MOD);
-            Display.updatePanel();
+            Body.restartBody();
+            FieldConstructor.buildField(DifficultyType.INTERMEDIATE_MODE);
+            MinesweeperView.setFrameSizeForDifficult(DifficultyType.INTERMEDIATE_MODE);
+            Body.updateBody();
         });
     }
 
     public static void startExpertMode() {
         Menu.getExpertMode().addActionListener(actionEvent -> {
-            Display.restart();
-            FieldConstructor.buildField(16, 30);
-            Display.setFrameSizeForDifficult(DifficultyType.EXPERT_MOD);
-            Display.updatePanel();
+            Body.restartBody();
+            FieldConstructor.buildField(DifficultyType.EXPERT_MODE);
+            MinesweeperView.setFrameSizeForDifficult(DifficultyType.EXPERT_MODE);
+            Body.updateBody();
         });
     }
 
