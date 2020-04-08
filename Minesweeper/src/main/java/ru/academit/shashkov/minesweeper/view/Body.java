@@ -10,7 +10,7 @@ public class Body {
     private static JPanel body;
 
     public static void addBody(GridBagConstraints constraints) {
-        body = new JPanel(new GridBagLayout());
+        body = new JPanel(new GridLayout(rowsNumber, columnsNumber));
         MinesweeperView.getFrame().add(body, constraints);
     }
 

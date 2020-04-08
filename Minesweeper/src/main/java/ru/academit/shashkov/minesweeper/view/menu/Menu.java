@@ -1,11 +1,13 @@
 package ru.academit.shashkov.minesweeper.view.menu;
 
 import lombok.Getter;
-import ru.academit.shashkov.minesweeper.view.ActionListenerManager;
+import ru.academit.shashkov.minesweeper.view.ListenerCreator;
 
 import javax.swing.*;
 
 public class Menu {
+    @Getter
+    private static final JMenuItem restart;
     @Getter
     private static final JMenuItem beginnerMode;
     @Getter
@@ -24,6 +26,7 @@ public class Menu {
     private static final JMenuItem exit;
 
     static {
+        restart = new JMenuItem("Restart");
         beginnerMode = new JMenuItem("Beginner");
         intermediateMode = new JMenuItem("Intermediate");
         expertMode = new JMenuItem("Expert");
@@ -57,15 +60,16 @@ public class Menu {
             e.setContentAreaFilled(false);
         }
 
+        menu.add(restart);
         menu.add(newGame);
         menu.add(highScoreTable);
         menu.add(exit);
         menuBar.add(menu);
 
-        ActionListenerManager.startBeginnerMode();
-        ActionListenerManager.startExpertMode();
-        ActionListenerManager.startIntermediateMode();
-        ActionListenerManager.exit();
+        ListenerCreator.startBeginnerMode();
+        ListenerCreator.startExpertMode();
+        ListenerCreator.startIntermediateMode();
+        ListenerCreator.exit();
 
         return menuBar;
     }

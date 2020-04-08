@@ -29,7 +29,8 @@ public class Header {
         smileButton.setContentAreaFilled(false);
 
         minesNumber.setIcon(IconsManager.getRemainingBombs());
-        minesNumber.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        minesNumber.setFont(new Font("TimesRoman", Font.BOLD, 22));
+        timer.setFont(new Font("TimesRoman", Font.BOLD, 22));
         timer.setIcon(IconsManager.getTimer());
 
         GridBagConstraints headerConstraints = new GridBagConstraints();

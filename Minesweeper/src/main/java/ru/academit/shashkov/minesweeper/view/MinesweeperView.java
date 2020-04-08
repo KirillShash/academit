@@ -1,7 +1,7 @@
 package ru.academit.shashkov.minesweeper.view;
 
 import lombok.Getter;
-import ru.academit.shashkov.minesweeper.common.DifficultyType;
+import ru.academit.shashkov.minesweeper.common.DifficultyMode;
 import ru.academit.shashkov.minesweeper.controller.Controller;
 import ru.academit.shashkov.minesweeper.view.iconsmanager.IconsManager;
 import ru.academit.shashkov.minesweeper.view.menu.CustomModeMenu;
@@ -13,7 +13,7 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class MinesweeperView implements View {
-    private static final Map<DifficultyType, Dimension> frameSize;
+    private static final Map<DifficultyMode, Dimension> frameSize;
     @Getter
     private static final JFrame frame;
     private final Controller controller;
@@ -24,11 +24,11 @@ public class MinesweeperView implements View {
 
     static {
         frame = new JFrame("Minesweeper");
-        frameSize = new EnumMap<>(DifficultyType.class);
-        frameSize.put(DifficultyType.BEGINNER_MODE, new Dimension(500, 500));
-        frameSize.put(DifficultyType.INTERMEDIATE_MODE, new Dimension(600, 700));
-        frameSize.put(DifficultyType.EXPERT_MODE, new Dimension(1000, 700));
-        frameSize.put(DifficultyType.CUSTOM_MODE, CustomModeMenu.getDimensionCustomMode());
+        frameSize = new EnumMap<>(DifficultyMode.class);
+        frameSize.put(DifficultyMode.BEGINNER_MODE, new Dimension(500, 500));
+        frameSize.put(DifficultyMode.INTERMEDIATE_MODE, new Dimension(600, 700));
+        frameSize.put(DifficultyMode.EXPERT_MODE, new Dimension(1000, 700));
+        frameSize.put(DifficultyMode.CUSTOM_MODE, CustomModeMenu.getDimensionCustomMode());
     }
 
     @Override
@@ -37,7 +37,7 @@ public class MinesweeperView implements View {
         frame.setIconImage(IconsManager.getGameIcon().getImage());
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        frame.setSize(frameSize.get(DifficultyType.BEGINNER_MODE));
+        frame.setSize(frameSize.get(DifficultyMode.BEGINNER_MODE));
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setJMenuBar(Menu.addMenu());
@@ -51,7 +51,7 @@ public class MinesweeperView implements View {
         customModeMenu.addCustomMenu();
     }
 
-    public static void setFrameSizeForDifficult(DifficultyType difficultyType) {
-        frame.setSize(frameSize.get(difficultyType));
+    public static void setFrameSizeForDifficult(DifficultyMode difficultyMode) {
+        frame.setSize(frameSize.get(difficultyMode));
     }
 }

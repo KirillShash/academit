@@ -1,11 +1,57 @@
 package ru.academit.shashkov.minesweeper.model;
 
-import ru.academit.shashkov.minesweeper.common.DifficultyType;
-import ru.academit.shashkov.minesweeper.view.FieldConstructor;
-
 public class GameManager implements Model {
-
     public void startPlay() {
-        FieldConstructor.buildField(DifficultyType.BEGINNER_MODE);
+
+    }
+
+    @Override
+    public void setMinesweeperView() {
+
+    }
+
+    @Override
+    public boolean isFirstMove() {
+        return false;
+    }
+
+    @Override
+    public void restartGame() {
+
+    }
+
+    @Override
+    public void setHighScore() {
+
+    }
+
+    @Override
+    public void fillField() {
+
+    }
+
+    @Override
+    public void openCell() {
+
+    }
+
+    @Override
+    public void stopGameAfterVictory() {
+
+    }
+
+    @Override
+    public void stopGameAfterDefeat() {
+
+    }
+
+    @Override
+    public boolean isEndGame() {
+        return false;
+    }
+
+    @Override
+    public boolean isGameWon() {
+        return false;
     }
 }

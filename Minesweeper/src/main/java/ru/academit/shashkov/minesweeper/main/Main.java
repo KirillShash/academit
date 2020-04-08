@@ -14,6 +14,6 @@ public class Main {
         MinesweeperView view = new MinesweeperView(controller);
         /*model.setMinesweeperView(view);
         model.prepareGame();*/
-        SwingUtilities.invokeLater(model::startPlay);
+        SwingUtilities.invokeLater(view::run);
     }
 }

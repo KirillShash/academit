@@ -1,7 +1,7 @@
 package ru.academit.shashkov.minesweeper.view.menu;
 
 import lombok.Getter;
-import ru.academit.shashkov.minesweeper.common.DifficultyType;
+import ru.academit.shashkov.minesweeper.common.DifficultyMode;
 import ru.academit.shashkov.minesweeper.view.Body;
 import ru.academit.shashkov.minesweeper.view.FieldConstructor;
 import ru.academit.shashkov.minesweeper.view.MinesweeperView;
@@ -95,7 +95,7 @@ public class CustomModeMenu extends JFrame {
                 }
 
                 Body.restartBody();
-                FieldConstructor.buildField(DifficultyType.CUSTOM_MODE);
+                FieldConstructor.buildField(DifficultyMode.CUSTOM_MODE);
                 setVisible(false);
 
                 MinesweeperView.getFrame().setSize(getDimensionCustomMode());
