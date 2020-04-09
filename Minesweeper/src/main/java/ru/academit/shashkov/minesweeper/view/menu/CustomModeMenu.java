@@ -1,10 +1,8 @@
 package ru.academit.shashkov.minesweeper.view.menu;
 
 import lombok.Getter;
-import ru.academit.shashkov.minesweeper.common.DifficultyMode;
 import ru.academit.shashkov.minesweeper.view.Body;
-import ru.academit.shashkov.minesweeper.view.FieldConstructor;
-import ru.academit.shashkov.minesweeper.view.MinesweeperView;
+import ru.academit.shashkov.minesweeper.view.MinesweeperSwingView;
 import ru.academit.shashkov.minesweeper.view.iconsmanager.IconsManager;
 
 import javax.swing.*;
@@ -95,10 +93,10 @@ public class CustomModeMenu extends JFrame {
                 }
 
                 Body.restartBody();
-                FieldConstructor.buildField(DifficultyMode.CUSTOM_MODE);
+                /*FieldConstructor.buildField(DifficultyMode.CUSTOM_MODE);*/
                 setVisible(false);
 
-                MinesweeperView.getFrame().setSize(getDimensionCustomMode());
+                MinesweeperSwingView.getFrame().setSize(getDimensionCustomMode());
 
                 Body.updateBody();
             } catch (NumberFormatException exception) {

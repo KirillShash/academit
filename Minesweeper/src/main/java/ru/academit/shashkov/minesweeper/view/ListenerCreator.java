@@ -1,11 +1,9 @@
 package ru.academit.shashkov.minesweeper.view;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import ru.academit.shashkov.minesweeper.common.StandardDifficultyModes;
 import ru.academit.shashkov.minesweeper.controller.Controller;
 import ru.academit.shashkov.minesweeper.controller.MenuCommands;
-import ru.academit.shashkov.minesweeper.view.menu.Menu;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -13,13 +11,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-@Slf4j
 @AllArgsConstructor
 public class ListenerCreator {
     private final Controller controller;
+    private final MinesweeperSwingView minesweeperSwingView;
 
     MouseListener createListenerForPlayingField(int x, int y) {
         return new MouseAdapter() {
+
             @Override
             public void mouseClicked(MouseEvent e) {
                 switch (e.getButton()) {
@@ -65,11 +64,11 @@ public class ListenerCreator {
                     break;
 
                 case SWITCH_TO_CUSTOM_MODE:
-                    swingView.showCustomSettings(controller.getDifficultyMode());
+                    minesweeperSwingView.showCustomSettings(controller.getDifficultyMode());
                     break;
 
                 case HIGH_SCORES:
-                    swingView.showHighScores(controller.getHighScores());
+                    minesweeperSwingView.showHighScores(controller.getHighScores());
                     break;
 
                 case EXIT:
@@ -94,9 +93,5 @@ public class ListenerCreator {
             (JTextField textRowsNumber, JTextField textColumnsNumber, JTextField textMinesNumber) {
         return e -> controller.processCustomSettings
                 (textRowsNumber.getText(), textColumnsNumber.getText(), textMinesNumber.getText());
-    }
-
-    public static void exit() {
-        Menu.getExit().addActionListener(actionEvent -> System.exit(0));
     }
 }

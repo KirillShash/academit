@@ -3,7 +3,7 @@ package ru.academit.shashkov.minesweeper.model;
 import ru.academit.shashkov.minesweeper.common.DifficultyMode;
 import ru.academit.shashkov.minesweeper.common.Score;
 import ru.academit.shashkov.minesweeper.common.StandardDifficultyModes;
-import ru.academit.shashkov.minesweeper.view.MinesweeperView;
+import ru.academit.shashkov.minesweeper.view.MinesweeperSwingView;
 
 import java.util.Map;
 
@@ -22,7 +22,7 @@ public interface Model {
 
     void setFlag(int x, int y);
 
-    void setMinesweeperView(MinesweeperView minesweeperView);
+    void setMinesweeperView(MinesweeperSwingView minesweeperSwingView);
 
     void initMinesweeperView();
 
