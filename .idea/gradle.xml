@@ -14,6 +14,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Minesweeper" />
+            <option value="$PROJECT_DIR$/ProducerConsumer" />
             <option value="$PROJECT_DIR$/main" />
           </set>
         </option>
