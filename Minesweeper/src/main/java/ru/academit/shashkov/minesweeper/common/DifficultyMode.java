@@ -1,5 +1,8 @@
 package ru.academit.shashkov.minesweeper.common;
 
+import lombok.Getter;
+
+@Getter
 public class DifficultyMode {
     public static final String CUSTOM_MODE_NAME = "Особый";
 

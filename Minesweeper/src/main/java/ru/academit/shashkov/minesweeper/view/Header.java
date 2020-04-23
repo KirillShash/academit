@@ -8,12 +8,12 @@ import java.awt.*;
 import java.text.SimpleDateFormat;
 
 public class Header {
-    private static final String TIMER_FORMAT = "mm:ss";
-    private static final String START_TIME_VALUE = "00:00";
+    private static final String TIMER_FORMAT = "ss";
+    private static final String START_TIME_VALUE = "000";
 
-    private static final int DISPLAY_ELEMENT_WIDTH = 50;
-    private static final int DISPLAY_ELEMENT_HEIGHT = 30;
-    private static final Dimension displayElementSize = new Dimension(DISPLAY_ELEMENT_WIDTH, DISPLAY_ELEMENT_HEIGHT);
+    private static final int HEADER_ELEMENT_WIDTH = 50;
+    private static final int HEADER_ELEMENT_HEIGHT = 30;
+    private static final Dimension headerElementSize = new Dimension(HEADER_ELEMENT_WIDTH, HEADER_ELEMENT_HEIGHT);
     private final SimpleDateFormat simpleDateFormat;
     private final ListenerCreator listenerCreator;
 
@@ -30,31 +30,30 @@ public class Header {
         this.simpleDateFormat = new SimpleDateFormat(TIMER_FORMAT);
     }
 
-
-    private void createDisplay() {
+    private void createHeader() {
         JLabel timerIcon = new JLabel();
         timerIcon.setIcon(IconsManager.getTimer());
         timerIcon.setPreferredSize(new Dimension(30, 30));
 
         timer = new JLabel();
-        timer.setPreferredSize(displayElementSize);
+        timer.setPreferredSize(headerElementSize);
         timer.setHorizontalAlignment(SwingConstants.CENTER);
 
         restartButton = new JButton(IconsManager.getBaseRestartButtonIcon());
         restartButton.setContentAreaFilled(false);
         restartButton.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        restartButton.setPreferredSize(displayElementSize);
+        restartButton.setPreferredSize(headerElementSize);
         restartButton.setHorizontalAlignment(SwingConstants.CENTER);
         restartButton.setFocusPainted(false);
         restartButton.addActionListener(listenerCreator.createListenerForRestartButton());
 
         JLabel remainingBombsIcon = new JLabel();
         remainingBombsIcon.setIcon(IconsManager.getRemainingBombs());
-        remainingBombsIcon.setPreferredSize(displayElementSize);
+        remainingBombsIcon.setPreferredSize(headerElementSize);
         remainingBombsIcon.setHorizontalAlignment(SwingConstants.CENTER);
 
         remainingBombs = new JLabel();
-        remainingBombs.setPreferredSize(displayElementSize);
+        remainingBombs.setPreferredSize(headerElementSize);
         remainingBombs.setHorizontalAlignment(SwingConstants.CENTER);
 
         headerPanel.add(timerIcon);
@@ -90,5 +89,26 @@ public class Header {
         gbc.anchor = GridBagConstraints.WEST;
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         headerPanel.add(timerIcon, gbc);
+    }
+
+    void updateRestartButtonIcon(boolean isVictory) {
+        Icon icon = isVictory ? IconsManager.getWinnerRestartButton() : IconsManager.getDeadRestartButton();
+        restartButton.setIcon(icon);
+    }
+
+    void setBaseRestartButtonIcon() {
+        restartButton.setIcon(IconsManager.getBaseRestartButtonIcon());
+    }
+
+    void showRemainingBombsNumbers(int numberOfFlags) {
+        remainingBombs.setText(String.valueOf(numberOfFlags));
+    }
+
+    void modifyTimer(long timeSpent) {
+        timer.setText(simpleDateFormat.format(timeSpent));
+    }
+
+    void setTimerStartValue() {
+        timer.setText(START_TIME_VALUE);
     }
 }

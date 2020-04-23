@@ -1,76 +1,64 @@
 package ru.academit.shashkov.minesweeper.view.menu;
 
 import lombok.Getter;
+import ru.academit.shashkov.minesweeper.common.DifficultyMode;
+import ru.academit.shashkov.minesweeper.common.StandardDifficultyModes;
+import ru.academit.shashkov.minesweeper.controller.MenuCommands;
 import ru.academit.shashkov.minesweeper.view.ListenerCreator;
 
 import javax.swing.*;
 
 public class Menu {
     @Getter
-    private static final JMenuItem restart;
-    @Getter
-    private static final JMenuItem beginnerMode;
-    @Getter
-    private static final JMenuItem intermediateMode;
-    @Getter
-    private static final JMenuItem expertMode;
-    @Getter
-    private static final JMenuItem customMode;
-    @Getter
-    private static final JMenuItem beginnerModeHighScore;
-    @Getter
-    private static final JMenuItem intermediateModeHighScore;
-    @Getter
-    private static final JMenuItem expertModeHighScore;
-    @Getter
-    private static final JMenuItem exit;
+    private final JMenuBar menuBar;
+    private final ListenerCreator listenerCreator;
 
-    static {
-        restart = new JMenuItem("Restart");
-        beginnerMode = new JMenuItem("Beginner");
-        intermediateMode = new JMenuItem("Intermediate");
-        expertMode = new JMenuItem("Expert");
-        customMode = new JMenuItem("Custom Mode");
-        beginnerModeHighScore = new JMenuItem("Beginner");
-        intermediateModeHighScore = new JMenuItem("Intermediate");
-        expertModeHighScore = new JMenuItem("Expert");
-        exit = new JMenuItem("Exit");
+    public Menu(ListenerCreator listenerCreator) {
+        this.listenerCreator = listenerCreator;
+        menuBar = new JMenuBar();
+        createMenu();
     }
 
-    public static JMenuBar addMenu() {
-        JMenuBar menuBar = new JMenuBar();
+    private void createMenu() {
+        JMenu gameMenu = new JMenu("Игра");
+        JMenuItem newGame = new JMenuItem("Новая игра");
+        newGame.setActionCommand(MenuCommands.RESTART.name());
 
-        JMenu menu = new JMenu("Menu");
-        JMenu newGame = new JMenu("New game");
-        JMenu highScoreTable = new JMenu("High score table");
+        JMenuItem beginnerMode = new JMenuItem(StandardDifficultyModes.BEGINNER.getDifficultyMode().getName());
+        beginnerMode.setActionCommand(MenuCommands.SWITCH_TO_BEGINNER_MODE.name());
 
-        newGame.add(beginnerMode);
-        newGame.add(intermediateMode);
-        newGame.add(expertMode);
-        newGame.add(customMode);
+        JMenuItem intermediateMode = new JMenuItem(StandardDifficultyModes.INTERMEDIATE.getDifficultyMode().getName());
+        intermediateMode.setActionCommand(MenuCommands.SWITCH_TO_INTERMEDIATE_MODE.name());
 
-        highScoreTable.add(beginnerModeHighScore);
-        highScoreTable.add(intermediateModeHighScore);
-        highScoreTable.add(expertModeHighScore);
+        JMenuItem expertMode = new JMenuItem(StandardDifficultyModes.EXPERT.getDifficultyMode().getName());
+        expertMode.setActionCommand(MenuCommands.SWITCH_TO_EXPERT_MODE.name());
 
-        JMenuItem[] items = {beginnerMode, intermediateMode, expertMode, customMode, beginnerModeHighScore, intermediateModeHighScore, expertModeHighScore, exit};
+        JMenuItem customMode = new JMenuItem(DifficultyMode.CUSTOM_MODE_NAME);
+        customMode.setActionCommand(MenuCommands.SWITCH_TO_CUSTOM_MODE.name());
 
-        for (JMenuItem e : items) {
-            e.setFocusPainted(false);
-            e.setContentAreaFilled(false);
+        JMenuItem highScores = new JMenuItem("Таблица рекордов");
+        highScores.setActionCommand(MenuCommands.HIGH_SCORES.name());
+
+        JMenuItem quit = new JMenuItem("Выйти из игры");
+        quit.setActionCommand(MenuCommands.EXIT.name());
+
+        gameMenu.add(newGame);
+        gameMenu.add(beginnerMode);
+        gameMenu.add(intermediateMode);
+        gameMenu.add(expertMode);
+        gameMenu.add(customMode);
+        gameMenu.add(highScores);
+        gameMenu.add(quit);
+
+        addActionListenerOnMenu(gameMenu);
+
+        menuBar.add(gameMenu);
+    }
+
+    private void addActionListenerOnMenu(JMenu menu) {
+        for (int i = 0; i < menu.getItemCount(); i++) {
+            JMenuItem item = menu.getItem(i);
+            item.addActionListener(listenerCreator.createListenerForMenuButton());
         }
-
-        menu.add(restart);
-        menu.add(newGame);
-        menu.add(highScoreTable);
-        menu.add(exit);
-        menuBar.add(menu);
-
-        ListenerCreator.startBeginnerMode();
-        ListenerCreator.startExpertMode();
-        ListenerCreator.startIntermediateMode();
-        ListenerCreator.exit();
-
-        return menuBar;
     }
 }

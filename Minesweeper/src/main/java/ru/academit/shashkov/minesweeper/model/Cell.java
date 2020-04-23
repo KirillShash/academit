@@ -1,11 +1,33 @@
 package ru.academit.shashkov.minesweeper.model;
 
-import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import ru.academit.shashkov.minesweeper.common.CellContent;
 import ru.academit.shashkov.minesweeper.common.CellState;
 
-@AllArgsConstructor
-public class Cell {
+@Getter
+@EqualsAndHashCode
+class Cell {
     private int x;
     private int y;
+
+    @Setter
     private CellState cellState;
+    @Setter
+    private CellContent cellContent;
+
+    @EqualsAndHashCode.Exclude
+    private int minesAroundNumber;
+
+    Cell(int x, int y, CellState cellState, CellContent cellContent) {
+        this.x = x;
+        this.y = y;
+        this.cellState = cellState;
+        this.cellContent = cellContent;
+    }
+
+    void increaseMinesAroundNumber() {
+        minesAroundNumber++;
+    }
 }
