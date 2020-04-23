@@ -1,5 +1,5 @@
 rootProject.name = 'academit'
-include 'main'
+include 'TemperatureConverter'
 include 'Minesweeper'
 include 'ProducerConsumer'
 include 'ThreadPool'
