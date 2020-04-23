@@ -1,20 +1,30 @@
 package ru.academit.shashkov.temperatureconverter.view;
 
+import lombok.Getter;
 import ru.academit.shashkov.temperatureconverter.controller.Controller;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Display implements View {
-    private final Controller controller;
+public class Window implements View {
     private JLabel result;
+    private final Controller controller;
 
-    public Display(Controller controller) {
+    @Getter
+    private static JFrame frame;
+    @Getter
+    private static JTextField inputText;
+    @Getter
+    private static JComboBox<String> comboBoxLeft;
+    @Getter
+    private static JComboBox<String> comboBoxRight;
+
+    public Window(Controller controller) {
         this.controller = controller;
     }
 
-    public void run() {
-        JFrame frame = new JFrame("Temperature converter");
+    public void addFrame() {
+        frame = new JFrame("Temperature converter");
         frame.setSize(350, 350);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -27,13 +37,13 @@ public class Display implements View {
         GridBagConstraints c = new GridBagConstraints();
         c.weightx = 1;
 
-        JTextField inputText = new JTextField();
+        inputText = new JTextField();
         c.gridx = 1;
         c.gridy = 0;
         inputText.setColumns(2);
         panel.add(inputText, c);
 
-        JComboBox<String> comboBoxLeft = new JComboBox<>();
+        comboBoxLeft = new JComboBox<>();
         comboBoxLeft.addItem("K");
         comboBoxLeft.addItem("C");
         comboBoxLeft.addItem("F");
@@ -49,6 +59,7 @@ public class Display implements View {
         JButton b = new JButton("convert");
         c.gridx = 1;
         c.gridy = 1;
+        b.addMouseListener(new ListenerCreator(controller).createListenerForConvertButton());
         panel.add(b, c);
 
         result = new JLabel("result");
@@ -61,25 +72,17 @@ public class Display implements View {
         c.gridy = 2;
         panel.add(resultType, c);
 
-        JComboBox<String> comboBoxRight = new JComboBox<>();
+        comboBoxRight = new JComboBox<>();
         comboBoxRight.addItem("C");
         comboBoxRight.addItem("K");
         comboBoxRight.addItem("F");
         c.gridx = 3;
         c.gridy = 2;
         panel.add(comboBoxRight, c);
+    }
 
-        b.addActionListener((e) -> {
-            try {
-                String leftType = (String) comboBoxLeft.getSelectedItem();
-                String rightType = (String) comboBoxRight.getSelectedItem();
-                controller.convert(Double.parseDouble(inputText.getText()), leftType, rightType);
-            } catch (NumberFormatException exception) {
-                JOptionPane.showMessageDialog(frame, "Only numbers and one dot are available for input.");
-                inputText.setText(null);
-            }
-        });
-
+    public void init() {
+        addFrame();
     }
 
     @Override

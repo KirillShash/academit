@@ -15,8 +15,8 @@ public class Controller {
         this.view = view;
     }
 
-    public void convert(double temperature, String leftStatement, String rightStatement) {
-        model.convert(temperature, leftStatement, rightStatement);
-        view.setResult(model.getResult());
+    public void convert() {
+        model.convert();
+        view.setResult(model.printResult());
     }
 }
